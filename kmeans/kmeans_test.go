@@ -46,9 +46,13 @@ func ReadData() n2df.N {
 func Test1(t* testing.T) {
     data := ReadData()
     //fmt.Println(data)
-    yData := n2df.LineN(data, 7)
+    //yData := n2df.LineN(data, 7)
     xIndexes := n1di.Arange(0, 7)
     xData := n2df.IndexingN(data, xIndexes)
-    fmt.Println(yData)
-    fmt.Println(xData)
+    
+    stdScaler := scaler.Standardization()
+    scaled := stdScaler.FitTransoform(xData)
+    
+    
+    
 }
