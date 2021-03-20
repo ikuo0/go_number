@@ -8,6 +8,7 @@ import (
     "os"
     "strconv"
     "github.com/ikuo0/go_number/tsv"
+    "github.com/ikuo0/go_number/n1di"
     "github.com/ikuo0/go_number/n2df"
 )
 
@@ -48,4 +49,6 @@ func Test1(t* testing.T) {
     yData := n2df.LineN(data, 7)
     xIndexes := n1di.Arange(0, 7)
     xData := n2df.IndexingN(data, xIndexes)
+    fmt.Println(yData)
+    fmt.Println(xData)
 }
