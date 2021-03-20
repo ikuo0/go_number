@@ -4,8 +4,8 @@ package tsv
 
 import (
     "encoding/csv"
-    "errors"
-    "fmt"
+    //"errors"
+    //"fmt"
     "os"
 )
 

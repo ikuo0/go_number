@@ -26,6 +26,4 @@ You can initialize this repository with code from a Subversion, Mercurial, or TF
 git commit -m change
 git push -u origin main
 
-go get github.com/ikuo0/go_number
-
-
+go get -u github.com/ikuo0/go_number
