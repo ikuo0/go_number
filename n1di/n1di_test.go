@@ -1,5 +1,5 @@
 
-package num1di
+package n1di
 
 import (
     "fmt"
@@ -33,4 +33,9 @@ func Test1(t *testing.T) {
     fmt.Println(n9)
     
     
+}
+
+func Test2(t* testing.T) {
+    x := Arange(3, 12)
+    fmt.Println(x)
 }

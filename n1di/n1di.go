@@ -1,9 +1,25 @@
 
-package num1di
+package n1di
 
 import (
     "os"
 )
+
+type N []int
+
+func New(count int) N {
+    res := make([]int, count)
+    return res
+}
+
+func Arange(start int, end int) N {
+    count := end - start
+    res := New(count)
+    for i := 0; i < count; i += 1 {
+        res[i] = start + i
+    }
+    return res
+}
 
 type Num1DI struct {
     Count int
