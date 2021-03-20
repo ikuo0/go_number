@@ -19,5 +19,7 @@ func Test1(t *testing.T) {
     fmt.Println(x5)
     x6 := Total(x5)
     fmt.Println(x6)
+    x7 := Sqrt(x3)
+    fmt.Println(x7)
 }
 

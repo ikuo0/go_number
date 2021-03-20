@@ -2,6 +2,7 @@
 package n2df
 
 import (
+    "math"
     "math/rand"
     
     "github.com/ikuo0/go_number/n1df"
@@ -54,11 +55,35 @@ func IndexingN(x N, indexes n1di.N) N {
 // calculation
 ////////////////////////////////////////
 
-func SubtractM(a N, b n1df.N) n1df.N {
+func SubtractM(a N, b n1df.N) N {
     rowSize := len(a)
     res := New(len(a), len(a[0]))
     for m := 0; m < rowSize; m += 1 {
         res[m] = n1df.Subtract(a[m], b)
+    }
+    return res
+}
+
+func Power(a N, b float64) N {
+    rowSize := len(a)
+    colSize := len(a[0])
+    res := New(len(a), len(a[0]))
+    for m := 0; m < rowSize; m += 1 {
+        for n := 0; n < colSize; n += 1 {
+            res[m][n] = math.Pow(a[m][n], b)
+        }
+    }
+    return res
+}
+
+func Sqrt(a N) N {
+    rowSize := len(a)
+    colSize := len(a[0])
+    res := New(len(a), len(a[0]))
+    for m := 0; m < rowSize; m += 1 {
+        for n := 0; n < colSize; n += 1 {
+            res[m][n] = math.Sqrt(a[m][n])
+        }
     }
     return res
 }
@@ -68,14 +93,13 @@ func TotalM(x N) n1df.N {
     colSize := len(x[0])
     res := n1df.Zeros(colSize)
     for m := 0; m < rowSize; m += 1 {
-        n1df.Addition(res, LineM(x, m))
+        res = n1df.AdditionI(res, LineM(x, m))
     }
     return res
 }
 
 func TotalN(x N) n1df.N {
     rowSize := len(x)
-    colSize := len(x[0])
     res := n1df.Zeros(rowSize)
     for m := 0; m < rowSize; m += 1 {
         res[m] = n1df.Total(x[m])
@@ -85,16 +109,23 @@ func TotalN(x N) n1df.N {
 
 func MeanM(x N) n1df.N {
     res := TotalM(x)
-    res = n1df.Division(float64(len(x)))
+    res = n1df.Division(res, float64(len(x)))
     return res
 }
 
 func VarianceM(x N, ddof float64) n1df.N {
     mean := MeanM(x)
     diff := SubtractM(x, mean)
-    total := TotalM(diff)
+    pow := Power(diff, 2)
+    total := TotalM(pow)
     div := n1df.Division(total, float64(len(diff)) - ddof)
     return div
+}
+
+func StddevM(x N, ddof float64) n1df.N {
+    variance := VarianceM(x, 1)
+    sqrt := n1df.Sqrt(variance)
+    return sqrt
 }
 
 

@@ -2,6 +2,7 @@
 package n1df
 
 import (
+    "math"
     "math/rand"
 )
 
@@ -68,6 +69,15 @@ func Division(a N, b float64) N {
     res := New(count)
     for i := 0; i < count; i += 1 {
         res[i] = a[i] / b
+    }
+    return res
+}
+
+func Sqrt(a N) N {
+    count := len(a)
+    res := New(count)
+    for i := 0; i < count; i += 1 {
+        res[i] = math.Sqrt(a[i])
     }
     return res
 }
