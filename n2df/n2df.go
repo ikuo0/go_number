@@ -46,7 +46,7 @@ func IndexingM(x N, indexes n1di.N) N {
 func IndexingN(x N, indexes n1di.N) N {
     res := make([][]float64, 0)
     for _, idx := range(indexes) {
-        res = append(res, LineN(x, idx))
+        res = append(res, LineN(x, int(idx)))
     }
     return Transpose(res)
 }

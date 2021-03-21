@@ -7,12 +7,11 @@ import (
     "sort"
 )
 
-type Number float64
-type N []Number
+type N []float64
 
 type IndexValue struct {
     Index int
-    Value Number
+    Value float64
 }
 
 func New(count int) N {
@@ -20,7 +19,7 @@ func New(count int) N {
     return res
 }
 
-func Full(count int, value Number) N {
+func Full(count int, value float64) N {
     res := New(count)
     for i := 0; i < count; i += 1 {
         res[i] = value
@@ -32,20 +31,20 @@ func Zeros(count int) N {
     return Full(count, 0)
 }
 
-func Arange(start Number, end Number, step Number) N {
+func Arange(start float64, end float64, step float64) N {
     count := int((end - start) / step)
     res := New(count)
     for i := 0; i < count; i += 1 {
-        res[i] = Number(i) * step + start
+        res[i] = float64(i) * step + start
     }
     return res
 }
 
-func Random(count int, min Number, max Number) N {
+func Random(count int, min float64, max float64) N {
     res := New(count)
     randRange := max - min
     for i := 0; i < count; i += 1 {
-        res[i] = Number(rand.Float64() * float64(randRange)) + min
+        res[i] = float64(rand.Float64() * float64(randRange)) + min
     }
     return res
 }
@@ -108,7 +107,7 @@ func AdditionI(a N, b N) N {
     return res
 }
 
-func Addition(a N, b Number) N {
+func Addition(a N, b float64) N {
     count := len(a)
     res := New(count)
     for i := 0; i < count; i += 1 {
@@ -126,7 +125,7 @@ func SubtractI(a N, b N) N {
     return res
 }
 
-func Division(a N, b Number) N {
+func Division(a N, b float64) N {
     count := len(a)
     res := New(count)
     for i := 0; i < count; i += 1 {
@@ -139,7 +138,7 @@ func Power(a N, b float64) N {
     count := len(a)
     res := New(count)
     for i := 0; i < count; i += 1 {
-        res[i] = Number(math.Pow(float64(a[i]), b))
+        res[i] = float64(math.Pow(float64(a[i]), b))
     }
     return res
 }
@@ -148,13 +147,13 @@ func Sqrt(a N) N {
     count := len(a)
     res := New(count)
     for i := 0; i < count; i += 1 {
-        res[i] = Number(math.Sqrt(float64(a[i])))
+        res[i] = float64(math.Sqrt(float64(a[i])))
     }
     return res
 }
 
-func Total(x N) Number {
-    res := Number(0)
+func Total(x N) float64 {
+    res := float64(0)
     count := len(x)
     for i := 0; i < count; i += 1 {
         res += x[i]
