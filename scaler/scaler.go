@@ -17,13 +17,18 @@ func Standardization() (StandardizationParams) {
 }
 
 func (me* StandardizationParams) Fit(x n2df.N) {
-    me.Mean = n2df.Mean(x)
-    me.Variance = n2df.Variance(x, 1)
-    me.Std = n2df.Sqrt(me.Variance)
+    me.Mean = n2df.MeanM(x)
+    me.Variance = n2df.VarianceM(x, 1)
+    me.Std = n1df.Sqrt(me.Variance)
 }
 
 func (me* StandardizationParams) Transform(x n2df.N) n2df.N {
     x = n2df.SubtractM(x, me.Mean)
-    x = nsdf.DivisionM(x, me.Std)
+    x = n2df.DivisionM(x, me.Std)
     return x
+}
+
+func (me* StandardizationParams) FitTransform(x n2df.N) n2df.N {
+    me.Fit(x)
+    return me.Transform(x)
 }

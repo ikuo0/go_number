@@ -2,10 +2,14 @@
 package scaler
 
 import (
-    "github.com/ikuo0/go_number/n2df"
+    "testing"
+    
+    "fmt"
+    
+    //"github.com/ikuo0/go_number/n2df"
 )
 
-var SampleData [][]float64 = {
+var SampleData = [][]float64 {
     {2.09320575959239, 8.81018176090025, 3.29120106436981, -1.2457162562604, -1.50725005857469},
     {3.73646145734219, -8.68725961565048, -6.86961490534418, -8.06060962171031, -3.98176278829426},
     {0.304252570041308, 6.27279921980194, -5.7147225483525, -2.38685621400628, -3.6388365133934},
@@ -16,10 +20,12 @@ var SampleData [][]float64 = {
     {-8.41092753252256, 1.89617195366125, -8.8175869737225, 3.84049174706224, -3.9695463798688},
 }
 
-func Test1() {
+func Test1(t* testing.T) {
     model := Standardization()
     model.Fit(SampleData)
     fmt.Println(model.Mean)
     fmt.Println(model.Variance)
     fmt.Println(model.Std)
+    scaled := model.Transform(SampleData)
+    fmt.Println(scaled)
 }

@@ -10,6 +10,7 @@ import (
     "github.com/ikuo0/go_number/tsv"
     "github.com/ikuo0/go_number/n1di"
     "github.com/ikuo0/go_number/n2df"
+    "github.com/ikuo0/go_number/scaler"
 )
 
 func ToFloat(X [][]string) (error, n2df.N) {
@@ -53,6 +54,5 @@ func Test1(t* testing.T) {
     stdScaler := scaler.Standardization()
     scaled := stdScaler.FitTransoform(xData)
     
-    
-    
+    fmt.Println(scaled)
 }
