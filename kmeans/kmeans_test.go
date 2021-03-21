@@ -71,4 +71,21 @@ func Test1(t* testing.T) {
 }
 
 func Test2(t* testing.T) {
+    fmt.Println("##############################")
+    fmt.Println("## kmeans start")
+    fmt.Println("##############################")
+    data := ReadData()
+    //fmt.Println(data)
+    //yData := n2df.LineN(data, 7)
+    xIndexes := n1di.Arange(0, 7, 1)
+    xData := n2df.IndexingN(data, xIndexes)
+    
+    
+    stdScaler := scaler.Standardization()
+    scaled := stdScaler.FitTransform(xData)
+    
+    // kmeans
+    model := New(3, 100, 1e-5)
+    model.Fit(scaled)
+    fmt.Println("predict", model.Predict)
 }

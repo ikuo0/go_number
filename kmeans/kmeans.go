@@ -2,6 +2,9 @@
 package kmeans
 
 import (
+    "fmt"
+    "math"
+    
     "github.com/ikuo0/go_number/n1df"
     "github.com/ikuo0/go_number/n1di"
     "github.com/ikuo0/go_number/n2df"
@@ -12,6 +15,7 @@ type Model struct {
     Iteration int
     Threshold float64
     InitMeans n2df.N
+    Predict n1di.N
     Means n2df.N
 }
 
@@ -53,7 +57,7 @@ func (me* Model) MStep(x n2df.N, predict n1di.N) n2df.N {
     means := make([][]float64, me.Clusters, len(x[0]))
     for cluster := 0; cluster < me.Clusters; cluster += 1 {
         indexes := n1di.WhereEq(predict, cluster)
-        crows := n2df.Indexing(x, indexes)
+        crows := n2df.IndexingM(x, indexes)
         cmeans := n2df.MeanM(crows)
         means[cluster] = cmeans
     }
@@ -62,23 +66,24 @@ func (me* Model) MStep(x n2df.N, predict n1di.N) n2df.N {
 
 func (me* Model) CalcMeansDistance(a n2df.N, b n2df.N) float64 {
     dif := n2df.SubtractX(a, b)
-    pow = n2df.Power(dif)
+    pow := n2df.Power(dif, 2)
     total := n2df.TotalX(pow)
-    distance = math.Sqrt(total / me.Clusters)
+    distance := math.Sqrt(total / float64(me.Clusters))
     return distance
 }
 
 func (me* Model) Fit(x n2df.N) {
     me.InitRandom(x)
     
-    me.Means := me.InitMeans
+    me.Means = me.InitMeans
     for i := 0; i < me.Iteration; i += 1 {
         predict := me.EStep(x, me.Means)
         newMeans := me.MStep(x, predict)
         distance := me.CalcMeansDistance(me.Means, newMeans)
+        me.Predict = predict
         me.Means = newMeans
-        means = newMeans
         
+        fmt.Println("distance", distance)
         if distance < me.Threshold {
             break
         }
