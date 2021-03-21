@@ -82,6 +82,15 @@ func Division(a N, b float64) N {
     return res
 }
 
+func Power(a N, b float64) N {
+    count := len(a)
+    res := New(count)
+    for i := 0; i < count; i += 1 {
+        res[i] = math.Pow(a[i], b)
+    }
+    return res
+}
+
 func Sqrt(a N) N {
     count := len(a)
     res := New(count)

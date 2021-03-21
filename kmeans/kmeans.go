@@ -2,7 +2,7 @@
 package kmeans
 
 import (
-    //"github.com/ikuo0/go_number/n1df"
+    "github.com/ikuo0/go_number/n1df"
     "github.com/ikuo0/go_number/n1di"
     "github.com/ikuo0/go_number/n2df"
 )
@@ -32,9 +32,9 @@ func (me* Model) InitRandom(x n2df.N) {
 
 func (me* Model) EStep(x n2df.N, means n2df.N) n1di.N {
     distances := n2df.New(len(x), me.Clusters)
-    for m, row : = range(x) {
+    for m, row := range(x) {
         for cluster := 0; cluster < me.Clusters; cluster += 1 {
-            diff := n1df.Subtract(row, means)
+            diff := n1df.SubtractI(row, means)
             pow := n1df.Power(diff)
             distance := n1df.Total(pow)
             distances[m][cluster] = distance
