@@ -34,8 +34,8 @@ func (me* Model) EStep(x n2df.N, means n2df.N) n1di.N {
     distances := n2df.New(len(x), me.Clusters)
     for m, row := range(x) {
         for cluster := 0; cluster < me.Clusters; cluster += 1 {
-            diff := n1df.SubtractI(row, means)
-            pow := n1df.Power(diff)
+            diff := n1df.SubtractI(row, means[cluster])
+            pow := n1df.Power(diff, 2)
             distance := n1df.Total(pow)
             distances[m][cluster] = distance
         }

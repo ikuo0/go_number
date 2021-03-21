@@ -48,7 +48,7 @@ func Test1(t* testing.T) {
     data := ReadData()
     //fmt.Println(data)
     //yData := n2df.LineN(data, 7)
-    xIndexes := n1di.Arange(0, 7)
+    xIndexes := n1di.Arange(0, 7, 1)
     xData := n2df.IndexingN(data, xIndexes)
     
     

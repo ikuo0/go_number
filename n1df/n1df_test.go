@@ -21,5 +21,13 @@ func Test1(t *testing.T) {
     fmt.Println(x6)
     x7 := Sqrt(x3)
     fmt.Println(x7)
+    argmin := ArgMin(x3)
+    fmt.Println("argmin", argmin)
+    x8 := Sort(x3)
+    fmt.Println(x8)
+    x9 := Arange(10, 21, 1.1)
+    fmt.Println(x9)
+    x10 := Shuffle(x9)
+    fmt.Println(x10)
 }
 
