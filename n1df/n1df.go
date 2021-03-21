@@ -64,7 +64,7 @@ func Addition(a N, b float64) N {
     return res
 }
 
-func Subtract(a N, b N) N {
+func SubtractI(a N, b N) N {
     count := len(a)
     res := New(count)
     for i := 0; i < count; i += 1 {

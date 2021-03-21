@@ -56,7 +56,7 @@ func Test1(t* testing.T) {
     scaled := stdScaler.FitTransform(xData)
     
     // kmeans
-    model := New(3, 1e-5)
+    model := New(3, 100, 1e-5)
     model.Fit(scaled)
     
     fmt.Println(model.InitMeans)
