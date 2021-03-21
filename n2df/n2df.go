@@ -67,6 +67,18 @@ func SubtractM(a N, b n1df.N) N {
     return res
 }
 
+func SubtractX(a N, b N) N {
+    rowSize := len(a)
+    colSize := len(a[0])
+    res := New(len(a), len(a[0]))
+    for m := 0; m < rowSize; m += 1 {
+        for n := 0; n < colSize; n += 1 {
+            res[m][n] = a[m][n] - b[m][n]
+        }
+    }
+    return res
+}
+
 func DivisionM(a N, b n1df.N) N {
     rowSize := len(a)
     colSize := len(a[0])
@@ -118,6 +130,18 @@ func TotalN(x N) n1df.N {
     res := n1df.Zeros(rowSize)
     for m := 0; m < rowSize; m += 1 {
         res[m] = n1df.Total(x[m])
+    }
+    return res
+}
+
+func TotalX(x N) float64 {
+    rowSize := len(x)
+    colSize := len(x[0])
+    res := float64(0)
+    for m := 0; m < rowSize; m += 1 {
+        for n := 0; n < colSize; n += 1 {
+            res += x[m][n]
+        }
     }
     return res
 }

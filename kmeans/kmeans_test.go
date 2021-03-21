@@ -57,11 +57,18 @@ func Test1(t* testing.T) {
     
     // kmeans
     model := New(3, 100, 1e-5)
-    model.Fit(scaled)
+    model.InitRandom(scaled)
+    predict := model.EStep(scaled, model.InitMeans)
+    means := model.MStep(scaled, predict)
+    fmt.Println(predict)
+    fmt.Println(means)
     
     fmt.Println(model.InitMeans)
     fmt.Println(len(xData))
     fmt.Println(len(xData[0]))
     fmt.Println(len(scaled))
     fmt.Println(len(scaled[0]))
+}
+
+func Test2(t* testing.T) {
 }

@@ -15,5 +15,7 @@ func Test1(t *testing.T) {
     fmt.Println(x3)
     x4 := Shuffle(x3)
     fmt.Println(x4)
+    indexes := WhereEq(x3, 7)
+    fmt.Println("indexes", indexes)
 }
 

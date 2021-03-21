@@ -24,7 +24,7 @@ func New(clusters int, iteration int, threshold float64) Model {
 }
 
 func (me* Model) InitRandom(x n2df.N) {
-    indexes := n1di.Arange(0, len(x))
+    indexes := n1di.Arange(0, len(x), 1)
     indexes = n1di.Shuffle(indexes)
     indexes = indexes[:me.Clusters]
     me.InitMeans = n2df.IndexingM(x, indexes)
@@ -46,13 +46,42 @@ func (me* Model) EStep(x n2df.N, means n2df.N) n1di.N {
         pred := n1df.ArgMin(distance)
         predict[m] = pred
     }
+    return predict
 }
 
-func (me* Model) MStep(x n2df.N, predict n1di.N) {
+func (me* Model) MStep(x n2df.N, predict n1di.N) n2df.N {
+    means := make([][]float64, me.Clusters, len(x[0]))
+    for cluster := 0; cluster < me.Clusters; cluster += 1 {
+        indexes := n1di.WhereEq(predict, cluster)
+        crows := n2df.Indexing(x, indexes)
+        cmeans := n2df.MeanM(crows)
+        means[cluster] = cmeans
+    }
+    return means
+}
+
+func (me* Model) CalcMeansDistance(a n2df.N, b n2df.N) float64 {
+    dif := n2df.SubtractX(a, b)
+    pow = n2df.Power(dif)
+    total := n2df.TotalX(pow)
+    distance = math.Sqrt(total / me.Clusters)
+    return distance
 }
 
 func (me* Model) Fit(x n2df.N) {
     me.InitRandom(x)
     
+    me.Means := me.InitMeans
+    for i := 0; i < me.Iteration; i += 1 {
+        predict := me.EStep(x, me.Means)
+        newMeans := me.MStep(x, predict)
+        distance := me.CalcMeansDistance(me.Means, newMeans)
+        me.Means = newMeans
+        means = newMeans
+        
+        if distance < me.Threshold {
+            break
+        }
+    }
 }
 
