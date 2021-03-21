@@ -51,6 +51,7 @@ func Test1(t* testing.T) {
     xIndexes := n1di.Arange(0, 7)
     xData := n2df.IndexingN(data, xIndexes)
     
+    
     stdScaler := scaler.Standardization()
     scaled := stdScaler.FitTransform(xData)
     
@@ -59,4 +60,8 @@ func Test1(t* testing.T) {
     model.Fit(scaled)
     
     fmt.Println(model.InitMeans)
+    fmt.Println(len(xData))
+    fmt.Println(len(xData[0]))
+    fmt.Println(len(scaled))
+    fmt.Println(len(scaled[0]))
 }

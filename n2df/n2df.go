@@ -48,7 +48,7 @@ func IndexingN(x N, indexes n1di.N) N {
     for _, idx := range(indexes) {
         res = append(res, LineN(x, idx))
     }
-    return res
+    return Transpose(res)
 }
 
 ////////////////////////////////////////
