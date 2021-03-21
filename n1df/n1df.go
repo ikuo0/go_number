@@ -28,7 +28,6 @@ func Zeros(count int) N {
 func Arange(start float64, end float64, step float64) N {
     count := int((end - start) / step)
     res := New(count)
-    randRange := max - min
     for i := 0; i < count; i += 1 {
         res[i] = float64(i) * step + start
     }
