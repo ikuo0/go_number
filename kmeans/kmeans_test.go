@@ -52,7 +52,11 @@ func Test1(t* testing.T) {
     xData := n2df.IndexingN(data, xIndexes)
     
     stdScaler := scaler.Standardization()
-    scaled := stdScaler.FitTransoform(xData)
+    scaled := stdScaler.FitTransform(xData)
     
-    fmt.Println(scaled)
+    // kmeans
+    model := New(3, 1e-5)
+    model.Fit(scaled)
+    
+    fmt.Println(model.InitMeans)
 }
