@@ -5,6 +5,8 @@ import (
     "testing"
     
     "fmt"
+    
+    "github.com/ikuo0/go_number/n1df"
 )
 
 
@@ -27,4 +29,13 @@ func Test1(t* testing.T) {
     fmt.Println("x7", x7)
     x8 := StddevM(x2, 1)
     fmt.Println("x8", x8)
+    
+    x9 := Arange(4, 3, 1)
+    fmt.Println(x9)
+    x10 := n1df.Full(10, 3)
+    fmt.Println(x10)
+    x11 := SubtractM(x9, x10)
+    fmt.Println(x11)
+    x12 := DivisionM(x9, x10)
+    fmt.Println(x12)
 }

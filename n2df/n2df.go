@@ -57,9 +57,24 @@ func IndexingN(x N, indexes n1di.N) N {
 
 func SubtractM(a N, b n1df.N) N {
     rowSize := len(a)
+    colSize := len(a[0])
     res := New(len(a), len(a[0]))
     for m := 0; m < rowSize; m += 1 {
-        res[m] = n1df.Subtract(a[m], b)
+        for n := 0; n < colSize; n += 1 {
+            res[m][n] = a[m][n] - b[n]
+        }
+    }
+    return res
+}
+
+func DivisionM(a N, b n1df.N) N {
+    rowSize := len(a)
+    colSize := len(a[0])
+    res := New(len(a), len(a[0]))
+    for m := 0; m < rowSize; m += 1 {
+        for n := 0; n < colSize; n += 1 {
+            res[m][n] = a[m][n] / b[n]
+        }
     }
     return res
 }
@@ -134,6 +149,18 @@ func New(rowSize int, colSize int) N {
     res := make([][]float64, rowSize)
     for i := range(res) {
         res[i] = make([]float64, colSize)
+    }
+    return res
+}
+
+func Arange(rowSize int, colSize int, start int) N {
+    res := New(rowSize, colSize)
+    counter := int(0)
+    for m := 0; m < rowSize; m += 1 {
+        for n := 0; n < colSize; n += 1 {
+            res[m][n] = float64(counter + start)
+            counter += 1
+        }
     }
     return res
 }
