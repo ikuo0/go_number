@@ -71,6 +71,36 @@ func Test1(t* testing.T) {
 }
 
 func Test2(t* testing.T) {
+    data := ReadData()
+    xIndexes := n1di.Arange(0, 7, 1)
+    xData := n2df.IndexingN(data, xIndexes)
+    
+    
+    stdScaler := scaler.Standardization()
+    scaled := stdScaler.FitTransform(xData)
+    
+    // kmeans
+    model := New(3, 100, 1e-5)
+    model.InitRandom(scaled)
+    
+    model.Means = model.InitMeans
+    for i := 0; i < model.Iteration; i += 1 {
+        predict := model.EStep(scaled, model.Means)
+        newMeans := model.MStep(scaled, predict)
+        distance := model.CalcMeansDistance(model.Means, newMeans)
+        model.Predict = predict
+        model.Means = newMeans
+        
+        fmt.Println("distance", distance)
+        if distance < model.Threshold {
+            break
+        }
+    }
+    fmt.Println(model.Means)
+    fmt.Println(model.Predict)
+}
+
+func Test3(t* testing.T) {
     fmt.Println("##############################")
     fmt.Println("## kmeans start")
     fmt.Println("##############################")
@@ -89,3 +119,4 @@ func Test2(t* testing.T) {
     model.Fit(scaled)
     fmt.Println("predict", model.Predict)
 }
+
